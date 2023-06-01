@@ -2,8 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const https = require('https');
-const fs = require('fs');
 const mongoose = require('mongoose');
 const router = require('./router/index');
 const errorMiddleware = require('./middlewares/error-middleware');
@@ -18,16 +16,12 @@ app.use(
     origin: process.env.CLIENT_URL,
   })
 );
-app.use('/uploads/doctor', express.static('uploads/doctor'));
-app.use('/uploads/doctor/avatar', express.static('uploads/doctor/avatar'));
-app.use('/uploads/user/avatar', express.static('uploads/user/avatar'));
+app.use('/uploads/doctor', express.static('uploads/doctor'))
+app.use('/uploads/doctor/avatar', express.static('uploads/doctor/avatar'))
+app.use('/uploads/user/avatar', express.static('uploads/user/avatar'))
 app.use('/api', router);
 app.use(errorMiddleware);
 
-const options = {
-  key: fs.readFileSync('/path/to/private/key.pem'),
-  cert: fs.readFileSync('/path/to/certificate.pem'),
-};
 
 const start = async () => {
   try {
@@ -35,7 +29,6 @@ const start = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    https.createServer(options, app);
     app.listen(PORT, () => console.log(`Server started on PORT = ${PORT}`));
   } catch (e) {
     console.log(e);
@@ -43,4 +36,4 @@ const start = async () => {
 };
 
 start();
-module.exports = { start, app };
+module.exports = { start, app }
