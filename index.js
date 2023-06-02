@@ -32,8 +32,12 @@ const start = async () => {
     });
 
     const options = {
-      key: fs.readFileSync('./cert/MyKey.key'), // Replace with the path to your private key
-      cert: fs.readFileSync('./cert/MyCertificate.crt'), // Replace with the path to your certificate
+      key: fs.readFileSync(
+        '/var/www/clients/client1/web2/ssl/centrmed.ua-le.key'
+      ),
+      cert: fs.readFileSync(
+        '/var/www/clients/client1/web2/ssl/centrmed.ua-le.crt'
+      ),
     };
 
     const server = https.createServer(options, app);
