@@ -1,3 +1,4 @@
+require('dotenv').config();
 const https = require('https');
 const fs = require('fs');
 const express = require('express');
@@ -32,7 +33,7 @@ const start = async () => {
 
     const options = {
       key: fs.readFileSync('./cert/MyKey.key'), // Replace with the path to your private key
-      cert: fs.readFileSync('/path/to/MyCertificate.crt'), // Replace with the path to your certificate
+      cert: fs.readFileSync('./cert/MyCertificate.crt'), // Replace with the path to your certificate
     };
 
     const server = https.createServer(options, app);
